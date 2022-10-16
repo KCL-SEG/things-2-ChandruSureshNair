@@ -2,10 +2,38 @@
 <head>
   <title>Things</title>
 </head>
+<style>
+  .form {
+    padding: 15px;
+  }
+  .field input,
+  .field textarea {
+    width: 500px;
+  }
+</style>
 <body>
   <h1>
     Things
   </h1>
   <p>Some stuff about things goes here.</p>
+  <div class="form">
+    <form method="POST">
+      {% csrf_token %}
+      {% for field in form %}
+        <div class="field">
+          {{ field.errors }}
+          <h3>
+            {{ field.label_tag }} 
+          </h3>
+          {{ field }}
+        </div>
+      {% endfor %}
+      <div>
+        <p>
+          <input type="submit" value="Submit">
+        </p>
+      </div>
+    </form>
+  </div>
 </body>
 </html>
